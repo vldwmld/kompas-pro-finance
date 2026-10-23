@@ -255,9 +255,15 @@ def build_main():
 
 def assemble_site():
     """Put every site in one folder for GitHub Pages: the main site at the top, each client in /<slug>/."""
-    if SITE.exists():
-        shutil.rmtree(SITE)
-    SITE.mkdir()
+    # Clear the old build but keep _site/.git, which publishes to the gh-pages branch.
+    SITE.mkdir(exist_ok=True)
+    for path in SITE.iterdir():
+        if path.name == ".git":
+            continue
+        if path.is_dir():
+            shutil.rmtree(path)
+        else:
+            path.unlink()
     shutil.copytree(ROOT / "assets", SITE / "assets")
     for pattern in ("*.html", "*.css", "*.js"):
         for path in ROOT.glob(pattern):

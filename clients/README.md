@@ -33,7 +33,21 @@ python3 build.py uob      # one client
 ```
 
 Each site is written to `dist/<slug>/`, opens on Beranda, and is marked `noindex`.
-Upload that folder as-is to publish it.
+
+## Publish
+
+```
+sh publish.sh
+```
+
+Rebuilds everything and pushes it to the `gh-pages` branch of
+github.com/vldwmld/kompas-pro-finance. The live links:
+
+- Main site: https://vldwmld.github.io/kompas-pro-finance/
+- A client: https://vldwmld.github.io/kompas-pro-finance/<slug>/ (e.g. `/uob/`, `/danamon/`)
+
+A new client folder appears there automatically after the next publish.
+Commit and push source changes to `main` as usual; `main` itself is not the live site.
 
 Shared pages are edited in the project root (and `templates/` for Dinamika Korporasi
 and the article layout); rebuild afterwards so every client site picks up the change.
