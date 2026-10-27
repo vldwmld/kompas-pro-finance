@@ -719,8 +719,12 @@ a.section-head:hover .section-head__chevron img {
 .report-card__cover {
   width: 248px;
   max-width: 100%;
-  aspect-ratio: 248 / 331;
   border-radius: 4px;
+}
+
+/* The cover fills the card's width and sets its own height, so nothing is cropped. */
+.report-card__cover img {
+  height: auto;
 }
 
 .report-card__actions {
@@ -2557,6 +2561,462 @@ body.has-side-menu {
 .chip__icon,
 .chip__more {
   display: none;
+}
+
+/* ---------- Report Reader ---------- */
+/* Follows reader.kompas.id: a full-screen reader with a dark toolbar along the bottom. */
+
+.reader {
+  --reader-toolbar: 44px;
+  --reader-page-gap: 8px;
+  --reader-tool-line: #444444;
+  --reader-tool-pressed: #ababab;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--color-grey-20);
+}
+
+.reader__body {
+  position: fixed;
+  inset: 0 0 var(--reader-toolbar) 0;
+  display: flex;
+}
+
+.reader__viewport {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: auto;
+  outline: none;
+  overscroll-behavior: contain;
+}
+
+.reader__viewport.is-pan {
+  cursor: grab;
+  user-select: none;
+}
+
+.reader__viewport.is-dragging {
+  cursor: grabbing;
+}
+
+.reader__pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  min-width: max-content;
+  padding: 24px;
+}
+
+.reader-spread {
+  display: flex;
+  gap: var(--reader-page-gap);
+}
+
+.reader-page {
+  position: relative;
+  flex: none;
+  background: var(--color-white);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.reader-page canvas,
+.reader-page__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.reader-page__hits {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.reader-hit {
+  position: absolute;
+  border-radius: 2px;
+  background: rgba(255, 204, 0, 0.5);
+  mix-blend-mode: multiply;
+}
+
+.reader__status {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-grey-50);
+  font-size: 16px;
+}
+
+.reader__status[hidden] {
+  display: none;
+}
+
+/* Page list */
+
+.reader-thumbs {
+  flex: none;
+  width: 200px;
+  overflow-y: auto;
+  border-right: 1px solid var(--color-grey-30);
+  background: var(--color-grey-10);
+}
+
+.reader-thumbs[hidden] {
+  display: none;
+}
+
+.reader-thumbs__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 24px;
+}
+
+.reader-thumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font: inherit;
+}
+
+.reader-thumb__image {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--color-white);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.reader-thumb__image canvas,
+.reader-thumb__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.reader-thumb:hover .reader-thumb__image {
+  box-shadow: 0 0 0 2px var(--color-grey-40);
+}
+
+.reader-thumb.is-active .reader-thumb__image {
+  box-shadow: 0 0 0 3px var(--color-sky);
+}
+
+.reader-thumb__number {
+  color: var(--color-grey-50);
+  font-size: 12px;
+  line-height: 1;
+}
+
+.reader-thumb.is-active .reader-thumb__number {
+  color: var(--color-grey-60);
+  font-weight: 700;
+}
+
+/* Toolbar */
+
+.reader-toolbar {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  height: var(--reader-toolbar);
+  background: var(--color-grey-60);
+  color: var(--color-grey-20);
+}
+
+.reader-toolbar__spacer {
+  flex: 1 1 0;
+}
+
+.reader-tool {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 47px;
+  height: var(--reader-toolbar);
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--reader-tool-line);
+  background: none;
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.reader-tool--joined {
+  border-left: 0;
+}
+
+.reader-tool--last {
+  border-right: 1px solid var(--reader-tool-line);
+}
+
+.reader-tool--home {
+  border-left: 0;
+}
+
+/* Hover shows a darker tile inside the button, as on kompas.id. */
+.reader-tool::after {
+  content: "";
+  position: absolute;
+  inset: 5px 5.5px;
+  border-radius: 2px;
+  background: transparent;
+}
+
+.reader-tool:hover::after,
+.reader-tool:focus-visible::after {
+  background: var(--color-grey-70);
+}
+
+.reader-tool[aria-pressed="true"],
+.reader-tool[aria-pressed="true"]:hover::after {
+  background: var(--reader-tool-pressed);
+}
+
+.reader-tool:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.reader-tool:disabled::after {
+  background: transparent;
+}
+
+.reader-tool svg,
+.reader-tool img {
+  position: relative;
+  z-index: 1;
+  width: 24px;
+  height: 24px;
+}
+
+.reader-tool svg,
+.reader-pager__step svg,
+.reader-search__step svg {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.reader-pager {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.reader-pager__step {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: var(--color-grey-20);
+  color: var(--color-grey-60);
+  cursor: pointer;
+}
+
+.reader-pager__step:hover {
+  background: var(--color-white);
+}
+
+.reader-pager__step:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.reader-pager__step svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.reader-pager__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reader-pager__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.reader-pager__input {
+  width: 44px;
+  height: 26px;
+  padding: 0 4px;
+  border: 0;
+  border-radius: 2px;
+  background: var(--color-grey-20);
+  color: var(--color-grey-60);
+  font: inherit;
+  font-weight: 700;
+  text-align: center;
+}
+
+.reader-pager__total strong {
+  color: var(--color-white);
+}
+
+/* Search */
+
+.reader-search {
+  position: fixed;
+  right: 0;
+  bottom: var(--reader-toolbar);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border-top-left-radius: 4px;
+  background: var(--color-grey-50);
+  color: #cccccc;
+  font-size: 14px;
+}
+
+.reader-search[hidden] {
+  display: none;
+}
+
+.reader-search__input {
+  width: 220px;
+  height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 2px;
+  background: var(--color-white);
+  color: var(--color-grey-60);
+  font: inherit;
+}
+
+.reader-search__count {
+  min-width: 72px;
+  white-space: nowrap;
+}
+
+.reader-search__step,
+.reader-search__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--color-grey-50);
+  border-radius: 2px;
+  background: #cccccc;
+  color: var(--color-grey-60);
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.reader-search__step {
+  width: 32px;
+}
+
+.reader-search__step svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.reader-search__close {
+  padding: 0 12px;
+}
+
+.reader-search__step:hover,
+.reader-search__close:hover {
+  background: var(--color-white);
+}
+
+@media (max-width: 767px) {
+  .reader-tool {
+    width: 42px;
+  }
+
+  /* Phones turn pages by scrolling, so the counter drops its arrows to fit 360px. */
+  .reader-pager__step {
+    display: none;
+  }
+
+  .reader-pager__total {
+    white-space: nowrap;
+  }
+
+  /* One page at a time and touch scrolling on phones, like the kompas.id reader. */
+  .reader-tool--wide {
+    display: none;
+  }
+
+  .reader__pages {
+    padding: 16px;
+  }
+
+  .reader-thumbs {
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: 1;
+    width: 160px;
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .reader-thumbs__list {
+    padding: 16px;
+  }
+
+  .reader-pager {
+    gap: 4px;
+  }
+
+  .reader-pager__input {
+    width: 40px;
+  }
+
+  .reader-search {
+    left: 0;
+    border-radius: 0;
+  }
+
+  .reader-search__input {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+  }
+
+  .reader-search__count {
+    min-width: 0;
+  }
+
+  .reader-search__close {
+    padding: 0 8px;
+  }
 }
 
 /* ---------- Responsive ---------- */
