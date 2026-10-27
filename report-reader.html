@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laporan — Kompas Professional Finance</title>
+  <meta name="description" content="Baca laporan strategis Kompas Professional Finance.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=PT+Sans:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="finance.css">
+</head>
+<body class="reader" data-report="outlook-2026">
+  <div class="reader__body">
+    <aside class="reader-thumbs" id="reader-thumbs" aria-label="Daftar halaman" hidden>
+      <div class="reader-thumbs__list"></div>
+    </aside>
+
+    <div class="reader__viewport" id="reader-viewport" tabindex="0" aria-label="Halaman laporan">
+      <div class="reader__pages"></div>
+      <p class="reader__status" role="status">Memuat laporan…</p>
+    </div>
+  </div>
+
+  <form class="reader-search" id="reader-search" role="search" hidden>
+    <input class="reader-search__input" type="search" placeholder="Cari kata kunci" aria-label="Cari kata kunci" autocomplete="off">
+    <span class="reader-search__count" aria-live="polite"></span>
+    <button class="reader-search__step" type="button" data-step="-1" aria-label="Hasil sebelumnya">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14l5-5 5 5"/></svg>
+    </button>
+    <button class="reader-search__step" type="button" data-step="1" aria-label="Hasil berikutnya">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 10l5 5 5-5"/></svg>
+    </button>
+    <button class="reader-search__close" type="button" aria-label="Tutup pencarian">Tutup</button>
+  </form>
+
+  <nav class="reader-toolbar" aria-label="Alat baca">
+    <a class="reader-tool reader-tool--home" href="laporan-strategis.html" title="Halaman utama" aria-label="Halaman utama">
+      <img src="assets/finance/menu-logo-k.svg" alt="">
+    </a>
+    <button class="reader-tool" type="button" data-action="thumbs" title="Daftar halaman" aria-label="Daftar halaman" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1"/></svg>
+    </button>
+    <button class="reader-tool reader-tool--wide" type="button" data-action="double" title="Tampilan 2 halaman" aria-label="Tampilan 2 halaman" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 6.5c-2-1.4-4.6-2-8-2v14c3.4 0 6 .6 8 2 2-1.4 4.6-2 8-2v-14c-3.4 0-6 .6-8 2z"/><path d="M12 6.5v14"/></svg>
+    </button>
+    <button class="reader-tool reader-tool--wide reader-tool--joined" type="button" data-action="single" title="Tampilan 1 halaman" aria-label="Tampilan 1 halaman" aria-pressed="true">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="3.5" width="12" height="17" rx="1"/><path d="M9 8h6M9 11.5h6M9 15h4"/></svg>
+    </button>
+    <button class="reader-tool" type="button" data-action="zoom-out" title="Perkecil" aria-label="Perkecil">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20M7.5 10.5h6"/></svg>
+    </button>
+    <button class="reader-tool reader-tool--joined" type="button" data-action="zoom-in" title="Perbesar" aria-label="Perbesar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20M7.5 10.5h6M10.5 7.5v6"/></svg>
+    </button>
+    <button class="reader-tool reader-tool--wide reader-tool--last" type="button" data-action="pan" title="Geser halaman" aria-label="Geser halaman" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12.5V6.8a1.4 1.4 0 012.8 0v4.7M10.8 11V5.4a1.4 1.4 0 012.8 0V11M13.6 11V6.4a1.4 1.4 0 012.8 0V12M16.4 10.5a1.4 1.4 0 012.8 0v3.8c0 3.7-2.6 6.2-6.2 6.2h-.6c-2.2 0-3.6-.9-4.8-2.6L5 13.8a1.4 1.4 0 012.2-1.6L8 13.3"/></svg>
+    </button>
+
+    <span class="reader-toolbar__spacer"></span>
+
+    <div class="reader-pager" title="Navigasi halaman">
+      <button class="reader-pager__step" type="button" data-action="prev" aria-label="Halaman sebelumnya">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 7l-5 5 5 5"/></svg>
+      </button>
+      <label class="reader-pager__label">
+        <span class="reader-pager__sr">Halaman</span>
+        <input class="reader-pager__input" type="text" inputmode="numeric" value="1" aria-label="Nomor halaman">
+        <span class="reader-pager__total">dari <strong>–</strong></span>
+      </label>
+      <button class="reader-pager__step" type="button" data-action="next" aria-label="Halaman berikutnya">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 7l5 5-5 5"/></svg>
+      </button>
+    </div>
+
+    <span class="reader-toolbar__spacer"></span>
+
+    <button class="reader-tool" type="button" data-action="fit" title="Menyesuaikan lebar" aria-label="Menyesuaikan lebar" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 12h17M7 8.5L3.5 12 7 15.5M17 8.5l3.5 3.5-3.5 3.5"/><path d="M3.5 4v3M20.5 4v3M3.5 17v3M20.5 17v3"/></svg>
+    </button>
+    <button class="reader-tool" type="button" data-action="search" title="Cari kata kunci" aria-label="Cari kata kunci" aria-pressed="false">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L20 20"/></svg>
+    </button>
+  </nav>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="report-reader.js"></script>
+</body>
+</html>

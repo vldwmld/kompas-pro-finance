@@ -34,6 +34,21 @@ python3 build.py uob      # one client
 
 Each site is written to `dist/<slug>/`, opens on Beranda, and is marked `noindex`.
 
+## Reports (Report Reader Page)
+
+`report-reader.html?laporan=<id>` opens the PDF in `assets/reports/<id>/`:
+
+- `laporan.pdf` — the report itself
+- `cover.jpg` — page 1, used on the report cards
+- `report.json` — `{"title": "…", "file": "laporan.pdf", "sizes": [[w, h], …]}`, one size per page in PDF points
+- `text.json` — the plain text of each page, for "Cari kata kunci"
+- `pages/` — optional images for pages pdf.js draws wrongly, listed in `report.json` as
+  `"images": {"1": "pages/001.jpg"}`. The outlook's covers use this: pdf.js clips their
+  "2026" lettering, so they are rendered by macOS instead.
+
+Every site gets the reports folder, so a link like
+`report-reader.html?laporan=outlook-2026` works on the main site and each client site.
+
 ## Publish
 
 ```

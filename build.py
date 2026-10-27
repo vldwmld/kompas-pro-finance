@@ -34,11 +34,13 @@ SHARED_FILES = [
     "artikel-universal-banking.html",
     "artikel-koreksi-ihsg.html",
     "artikel-asuransi-syariah.html",
+    "report-reader.html",
     "finance.css",
     "finance.js",
     "media-intelligence.js",
+    "report-reader.js",
 ]
-SHARED_DIRS = ["assets/finance", "assets/icons"]
+SHARED_DIRS = ["assets/finance", "assets/icons", "assets/reports"]
 
 NOINDEX = '<meta name="robots" content="noindex, nofollow">'
 
